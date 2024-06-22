@@ -508,7 +508,7 @@ MonoBehaviour:
   - {fileID: 968174616421602290, guid: 14ba22a5bf77e9646ad987d8f2741d74, type: 3}
   - {fileID: 6110571759241417785, guid: 8b9d6eb399fcf964ea0beb44499b8ff8, type: 3}
   - {fileID: 7175011360963346632, guid: b913eb77e4376ab459f652981cc40af5, type: 3}
-  StartMoneyAmount: 500
+  StartMoneyAmount: 10000
   RoadCellCost: 30
   OverviewUI: {fileID: 1533324639}
   buildingModeUI: {fileID: 917817111}

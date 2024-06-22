@@ -40,17 +40,15 @@ public class PathFinder : MonoBehaviour
         currentCell.CalculateFCost();
         //Debug.Log("currentCell fCost: "+currentCell.fCost);
 
-
+        Debug.Log("Pathfinding Started");
 
         while (OpenList.Count != 0) // check if we haven't checked all roadCells
         {
             currentCell = findLowestFCostCell(OpenList);
-            //Debug.Log(currentCell.fCost);
             if(currentCell.roadCell == endCell)
             {
-                //Finished Path
-                //Debug.Log("Finished Pathfinding");
                 foundPath = true;
+                Debug.Log("found set true");
                 break;
             }
 
@@ -87,28 +85,39 @@ public class PathFinder : MonoBehaviour
 
         RoadCell nowRoadCell = currentCell.roadCell;
         RoadCell prevRoadCell = null;
+        Debug.Log("nowRoadCell: "+nowRoadCell.transform.position);
         while(nowRoadCell != startCell)
         {
             prevRoadCell = nowRoadCell.pathFindingRoadCell.prevRoadCell;
+            Debug.Log("prevRoadCell: " + prevRoadCell.transform.position);
             if (prevRoadCell != null)
             {
                 if (Mathf.Abs(nowRoadCell.transform.position.x - prevRoadCell.transform.position.x) <= 1 && Mathf.Abs(nowRoadCell.transform.position.y - prevRoadCell.transform.position.y) <= 1)
                 {
-
+                    
                 }
                 else
                 {
                     foundPath = false;
+                    Debug.Log("found set false");
                     break;
                 }
                 nowRoadCell = prevRoadCell;
             }
             else
             {
-                foundPath= false;
                 break;
             }
         }
+
+        foreach(PathFindingRoadCell roadCell in OpenList)
+        {
+            roadCell.prevRoadCell = null;
+        }
+        if (foundPath)
+            Debug.Log("Path Found");
+        else
+            Debug.Log("Path Not Found");
         return foundPath;
     }
     protected void GetPath(Truck truck, RoadCell startCell, List<RoadCell> ReversePathList, List<RoadCell> PathList)
